@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <item
+        android:id="@+id/coupons"
+        android:icon="@drawable/coupons"
+        />
+
+    <item
+        android:id="@+id/add_new"
+        android:icon="@drawable/add"
+        />
+
+    <item
+        android:id="@+id/friends"
+        android:icon="@drawable/friends"
+        />
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/profile"
+        />
+
+</menu>
