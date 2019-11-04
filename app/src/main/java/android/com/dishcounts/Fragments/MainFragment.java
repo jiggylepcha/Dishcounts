@@ -18,7 +18,7 @@ import android.widget.ImageView;
 public class MainFragment extends Fragment {
     private ViewPager _mViewPager;
     private ImageViewPagerAdapter _adapter;
-    private ImageView _btn1, _btn2, _btn3, _btn4;
+    private ImageView _btn1, _btn2, _btn3;
 
     public MainFragment() {
     }
@@ -41,29 +41,22 @@ public class MainFragment extends Fragment {
         _btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _btn1.setImageResource(R.drawable.filled_circle);
+                _btn1.setImageResource(R.drawable.circlefilled);
                 _mViewPager.setCurrentItem(0);
             }
         });
         _btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _btn2.setImageResource(R.drawable.filled_circle);
+                _btn2.setImageResource(R.drawable.circlefilled);
                 _mViewPager.setCurrentItem(1);
             }
         });
         _btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _btn3.setImageResource(R.drawable.filled_circle);
+                _btn3.setImageResource(R.drawable.circlefilled);
                 _mViewPager.setCurrentItem(2);
-            }
-        });
-        _btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                _btn4.setImageResource(R.drawable.filled_circle);
-                _mViewPager.setCurrentItem(3);
             }
         });
     }
@@ -89,10 +82,9 @@ public class MainFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 // TODO Auto-generated method stub
-                _btn1.setImageResource(R.drawable.hollow_circle);
-                _btn2.setImageResource(R.drawable.hollow_circle);
-                _btn3.setImageResource(R.drawable.hollow_circle);
-                _btn4.setImageResource(R.drawable.hollow_circle);
+                _btn1.setImageResource(R.drawable.circle);
+                _btn2.setImageResource(R.drawable.circle);
+                _btn3.setImageResource(R.drawable.circle);
                 btnAction(position);
             }
         });
@@ -101,25 +93,22 @@ public class MainFragment extends Fragment {
     private void btnAction(int action) {
         switch (action) {
             case 0:
-                _btn1.setImageResource(R.drawable.filled_circle);
+                _btn1.setImageResource(R.drawable.circlefilled);
                 break;
             case 1:
-                _btn2.setImageResource(R.drawable.filled_circle);
+                _btn2.setImageResource(R.drawable.circlefilled);
                 break;
             case 2:
-                _btn3.setImageResource(R.drawable.filled_circle);
+                _btn3.setImageResource(R.drawable.circlefilled);
                 break;
-            case 3:
-                _btn4.setImageResource(R.drawable.filled_circle);
         }
     }
 
     private void initButton() {
         _btn1 = getView().findViewById(R.id.circular_button1);
-        _btn1.setImageResource(R.drawable.filled_circle);
+        _btn1.setImageResource(R.drawable.circlefilled);
         _btn2 = getView().findViewById(R.id.circular_button2);
         _btn3 = getView().findViewById(R.id.circular_button3);
-        _btn4 = getView().findViewById(R.id.circular_button4);
     }
 
     private void setButton(Button btn, String text, int h, int w) {

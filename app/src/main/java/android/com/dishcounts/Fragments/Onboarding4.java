@@ -12,7 +12,10 @@ import android.view.ViewGroup;
 
 import android.com.dishcounts.R;
 
+
 public class Onboarding4 extends Fragment {
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,4 +28,5 @@ public class Onboarding4 extends Fragment {
 
 
     }
+
 }
