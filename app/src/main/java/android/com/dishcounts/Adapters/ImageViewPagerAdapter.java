@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import android.com.dishcounts.Fragments.*;
 
 public class ImageViewPagerAdapter extends FragmentPagerAdapter {
-    public static int totalPage = 3;
+    public static int totalPage = 4;
     private Context _context;
 
     public ImageViewPagerAdapter(Context context, FragmentManager fm) {
@@ -30,6 +30,8 @@ public class ImageViewPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 f = new Onboarding3();
                 break;
+            case 3:
+                f = new Onboarding4();
         }
         return f;
     }

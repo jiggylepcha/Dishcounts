@@ -18,7 +18,7 @@ import android.widget.ImageView;
 public class MainFragment extends Fragment {
     private ViewPager _mViewPager;
     private ImageViewPagerAdapter _adapter;
-    private ImageView _btn1, _btn2, _btn3;
+    private ImageView _btn1, _btn2, _btn3, _btn4;
 
     public MainFragment() {
     }
@@ -59,6 +59,13 @@ public class MainFragment extends Fragment {
                 _mViewPager.setCurrentItem(2);
             }
         });
+        _btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _btn4.setImageResource(R.drawable.filled_circle);
+                _mViewPager.setCurrentItem(3);
+            }
+        });
     }
 
     private void setUpView() {
@@ -85,6 +92,7 @@ public class MainFragment extends Fragment {
                 _btn1.setImageResource(R.drawable.hollow_circle);
                 _btn2.setImageResource(R.drawable.hollow_circle);
                 _btn3.setImageResource(R.drawable.hollow_circle);
+                _btn4.setImageResource(R.drawable.hollow_circle);
                 btnAction(position);
             }
         });
@@ -101,6 +109,8 @@ public class MainFragment extends Fragment {
             case 2:
                 _btn3.setImageResource(R.drawable.filled_circle);
                 break;
+            case 3:
+                _btn4.setImageResource(R.drawable.filled_circle);
         }
     }
 
@@ -109,6 +119,7 @@ public class MainFragment extends Fragment {
         _btn1.setImageResource(R.drawable.filled_circle);
         _btn2 = getView().findViewById(R.id.circular_button2);
         _btn3 = getView().findViewById(R.id.circular_button3);
+        _btn4 = getView().findViewById(R.id.circular_button4);
     }
 
     private void setButton(Button btn, String text, int h, int w) {
