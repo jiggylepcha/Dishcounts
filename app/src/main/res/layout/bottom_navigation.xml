@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/coupons"
-        android:icon="@drawable/coupons"
+        android:icon="@drawable/couponslight"
         />
 
     <item
