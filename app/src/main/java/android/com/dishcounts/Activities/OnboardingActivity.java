@@ -98,6 +98,8 @@ public class OnboardingActivity extends AppCompatActivity {
                 // Google Sign In failed, update UI appropriately
                 Log.d(TAG, "Google sign in failed", e);
                 Toast.makeText(this, "Sign-In Failed! Please try again after sometime.", Toast.LENGTH_LONG).show();
+                //Intent userDashboardIntent = new Intent(OnboardingActivity.this, UserDashboard.class);
+                //startActivity(userDashboardIntent);
             }
         }
     }
