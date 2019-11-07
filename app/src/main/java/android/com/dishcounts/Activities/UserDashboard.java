@@ -13,6 +13,7 @@ import android.com.dishcounts.Fragments.ProfileFragment;
 import android.os.Bundle;
 import android.com.dishcounts.R;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,7 +26,7 @@ public class UserDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         Bundle extras = getIntent().getExtras();
         Boolean showToast;
