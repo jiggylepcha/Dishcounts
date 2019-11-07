@@ -17,7 +17,7 @@
         <activity android:name=".Activities.AddManualCouponActivity" />
         <activity android:name=".Activities.CouponActivity" />
         <activity android:name=".Activities.OnboardingActivity" />
-        <activity android:name=".Activities.UserDashboard" />
+        <activity android:name=".Activities.UserDashboard"></activity>
         <activity android:name=".Activities.SMSFetchActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>

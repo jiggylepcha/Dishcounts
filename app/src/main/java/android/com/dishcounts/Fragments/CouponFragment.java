@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ public class CouponFragment extends Fragment {
 
     private ArrayList<String> percentage = new ArrayList<>();
     private ArrayList<String> validity = new ArrayList<>();
+    private ArrayList<String> value = new ArrayList<>();
     Button coupon;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,15 +36,18 @@ public class CouponFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_coupon, container, false);
         initCouponPercentage();
         initRecyclerView(v);
+
         return v;
     }
 
     private void initRecyclerView(View v) {
         RecyclerView couponList = v.findViewById(R.id.coupon_recycler_view);
-        CouponViewAdapter adapter = new CouponViewAdapter(percentage, validity, getContext());
+        CouponViewAdapter adapter = new CouponViewAdapter(percentage, validity, value, getContext());
         couponList.setLayoutManager(new LinearLayoutManager(getContext()));
         couponList.setAdapter(adapter);
     }
+
+
 
 
     @Override
@@ -53,7 +58,7 @@ public class CouponFragment extends Fragment {
 
     private void initCouponPercentage(){
         Log.d(TAG, "Preparing the recycler view");
-        percentage.add("100");
+        percentage.add("100%");
         validity.add("12/9");
 
         percentage.add("20");

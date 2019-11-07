@@ -22,11 +22,13 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
 
     private ArrayList<String> percentage = new ArrayList<>();
     private ArrayList<String> date = new ArrayList<>();
+    private ArrayList<String> discountValue = new ArrayList<>();
     private Context mContext;
 
-    public CouponViewAdapter(ArrayList<String> percentage, ArrayList<String> date, Context mContext){
+    public CouponViewAdapter(ArrayList<String> percentage, ArrayList<String> date, ArrayList<String> discountValue, Context mContext){
         this.percentage = percentage;
         this.date = date;
+        this.discountValue = discountValue;
         this.mContext = mContext;
     }
 

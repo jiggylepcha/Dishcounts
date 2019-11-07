@@ -7,7 +7,7 @@
     android:background="@color/colorAccent"
     tools:context=".Fragments.CouponFragment">
 
-    <EditText
+    <SearchView
         android:id="@+id/textView"
         android:layout_width="362dp"
         android:layout_height="64dp"
@@ -84,13 +84,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coupon_recycler_view"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="558dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 
