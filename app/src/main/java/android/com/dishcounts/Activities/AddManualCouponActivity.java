@@ -59,6 +59,8 @@ public class AddManualCouponActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                myCalendar.set(Calendar.HOUR_OF_DAY,24);
+                myCalendar.set(Calendar.MINUTE,00);
                 updateLabel();
             }
 
