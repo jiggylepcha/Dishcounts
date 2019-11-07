@@ -1,6 +1,7 @@
 package android.com.dishcounts.Fragments;
 
 import android.com.dishcounts.Activities.FindFriendActivity;
+import android.com.dishcounts.Activities.PostActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -27,20 +28,20 @@ public class FriendsFragment extends Fragment {
         find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFind();
+                openPost();
             }
         });
         return v;
     }
 
-    public void openFind(){
-        Intent intent = new Intent(this.getContext(), FindFriendActivity.class);
+
+    public void openPost(){
+        Intent intent = new Intent(this.getContext(), PostActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
 
     }
 }
