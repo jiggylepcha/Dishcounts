@@ -98,20 +98,19 @@ public class AddManualCouponActivity extends AppCompatActivity {
         String platformStr = platform.getText().toString();
         if (platformStr.compareTo("") == 0){
             showErrorMessage("Enter Platform (Zomato, Swiggy, UberEats )");
+            return;
         }
         Integer discountNum = 0;
         try {
             discountNum = Integer.parseInt(discount.getText().toString());
-            return;
         }
         catch (Exception e){
             showErrorMessage("Enter Discount Percentage");
-
+            return;
         }
         Integer limitNum = 0;
         try{
             limitNum = Integer.parseInt(limit.getText().toString());
-            return;
         }
         catch (Exception e){
 
@@ -126,6 +125,8 @@ public class AddManualCouponActivity extends AppCompatActivity {
         coupon.put("discount_upto", limitNum);
         coupon.put("other_details", otherDetailsStr);
         coupon.put("valid_till", myCalendar.getTime());
+
+        Log.d("SMDFIREBASE", "CAME IN");
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("/all_coupons")
