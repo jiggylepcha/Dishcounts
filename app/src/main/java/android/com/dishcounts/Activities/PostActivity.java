@@ -100,8 +100,8 @@ public class PostActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d("SMDFIREBASE", "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Intent intent = new Intent(getBaseContext(), FindFriendActivity.class);
-                        intent.putExtra("showToast", true);
+                        Intent intent = new Intent(getBaseContext(), UserDashboard.class);
+                        intent.putExtra("showToast", false);
                         startActivity(intent);
                     }
                 })

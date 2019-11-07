@@ -35,8 +35,10 @@ public class UserDashboard extends AppCompatActivity {
             if (showToast){
                 Toast.makeText(this, "Coupon Added Succesfully!", Toast.LENGTH_SHORT).show();
             }
+            else{
+                Toast.makeText(this, "Post Added Succesfully!", Toast.LENGTH_SHORT).show();
+            }
         }
-
 
         toolbar = getSupportActionBar();
         toolbar.hide();
