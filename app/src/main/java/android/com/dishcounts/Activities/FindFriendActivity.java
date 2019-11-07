@@ -27,8 +27,6 @@ public class FindFriendActivity extends AppCompatActivity {
             }
         }
 
-
-
         post = findViewById(R.id.button24);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
