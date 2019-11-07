@@ -84,12 +84,39 @@ public class AddManualCouponActivity extends AppCompatActivity {
         validity.setText(sdf.format(myCalendar.getTime()));
     }
 
+    public void showErrorMessage(String text){
+        Toast.makeText(this,text, Toast.LENGTH_LONG).show();
+
+    }
 
     public void submitManualCoupon(View v){
         String couponTypeStr = couponType.getText().toString();
+        if (couponTypeStr.compareTo("") == 0){
+            showErrorMessage("Enter Coupon Type (BOGO or STRAIGHT DISCOUNT)");
+            return;
+        }
         String platformStr = platform.getText().toString();
-        Integer discountNum = Integer.parseInt(discount.getText().toString());
-        Integer limitNum = Integer.parseInt(limit.getText().toString());
+        if (platformStr.compareTo("") == 0){
+            showErrorMessage("Enter Platform (Zomato, Swiggy, UberEats )");
+        }
+        Integer discountNum = 0;
+        try {
+            discountNum = Integer.parseInt(discount.getText().toString());
+            return;
+        }
+        catch (Exception e){
+            showErrorMessage("Enter Discount Percentage");
+
+        }
+        Integer limitNum = 0;
+        try{
+            limitNum = Integer.parseInt(limit.getText().toString());
+            return;
+        }
+        catch (Exception e){
+
+        }
+
         String otherDetailsStr = otherDetails.getText().toString();
 
         Map<String, Object> coupon = new HashMap<>();
