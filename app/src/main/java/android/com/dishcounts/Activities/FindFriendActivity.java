@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class FindFriendActivity extends AppCompatActivity {
     Button post;
@@ -15,6 +16,19 @@ public class FindFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friend);
         getSupportActionBar().hide();
+
+        Bundle extras = getIntent().getExtras();
+        Boolean showToast;
+
+        if (extras != null){
+            showToast =  extras.getBoolean("showToast");
+            if (showToast){
+                Toast.makeText(this, "Post Made Succesfully!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+
         post = findViewById(R.id.button24);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
