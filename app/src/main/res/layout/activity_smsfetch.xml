@@ -10,8 +10,6 @@
         android:id="@+id/fetchMessagesButton"
         android:layout_width="150dp"
         android:layout_height="104dp"
-        android:text="Fetch Messages"
-        android:onClick="getMessagesFromInbox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
