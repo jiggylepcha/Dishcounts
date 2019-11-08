@@ -33,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.core.OrderBy;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,7 +68,7 @@ public class CouponFragment extends Fragment {
 //        initCouponPercentage();
 
         final Query couponQuery = couponCollection
-                .orderBy("valid_till");
+                .orderBy("valid_till", Query.Direction.DESCENDING);
         couponQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
