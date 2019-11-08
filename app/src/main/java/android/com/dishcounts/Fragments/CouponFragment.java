@@ -35,6 +35,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
 
 public class CouponFragment extends Fragment {
     private static final String TAG = "CouponFragment";
@@ -57,11 +59,10 @@ public class CouponFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         couponCollection = db.collection("all_coupons");
 
-        RecyclerView couponList = v.findViewById(R.id.coupon_recycler_view);
+        final RecyclerView couponList = v.findViewById(R.id.coupon_recycler_view);
         couponList.setHasFixedSize(true);
         couponList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new CouponViewAdapter(couponArrayList, getContext());
-        couponList.setAdapter(adapter);
+
 
 //        initCouponPercentage();
 
@@ -72,17 +73,53 @@ public class CouponFragment extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
-                        Coupon coupon = documentSnapshot.toObject(Coupon.class);
+                        Map<String, Object> couponMap = documentSnapshot.getData();
+                        Coupon coupon=new Coupon((String)couponMap.get("coupon_type"),(String)couponMap.get("coupon_code"),"",(String)couponMap.get("discount_upto"),(String)couponMap.get("platform"),(Date)couponMap.get("valid_till"),(String)couponMap.get("message"));
+                        if(!couponMap.get("discount_percent").equals("NA"))
+                        {
+                            coupon.setDiscount_percent((String)couponMap.get("discount_percent"));
+                        }
+                        else if(!couponMap.get("cashback_percent").equals("NA"))
+                        {
+                            coupon.setDiscount_percent((String)couponMap.get("cashback_percent"));
+                        }
+                        else if(!couponMap.get("discount_cash").equals("NA"))
+                        {
+                            int value=Integer.parseInt((String)couponMap.get("discount_cash"));
+                            if(value<=100)
+                            coupon.setDiscount_percent((String)couponMap.get("discount_cash"));
+                            else
+                                coupon.setDiscount_percent("75");
+                        }
+                        else if(!couponMap.get("cashback_cash").equals("NA"))
+                        {
+                            int value=Integer.parseInt((String)couponMap.get("cashback_cash"));
+                            if(value<=100)
+                                coupon.setDiscount_percent((String)couponMap.get("cashback_cash"));
+                            else
+                                coupon.setDiscount_percent("75");
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        //Coupon coupon=new Coupon(couponMap.get("coupon_type"),);
+
+
+                        //Coupon coupon = documentSnapshot.toObject(Coupon.class);
                         couponArrayList.add(coupon);
+                        //Log.d(TAG, "PERCENT: "+coupon.getDiscountPercentage());
+
                     }
+                    adapter = new CouponViewAdapter(couponArrayList, getContext());
+                    couponList.setAdapter(adapter);
                 }
                 else {
 
                 }
             }
         });
-
-        Log.d(TAG, "coupon "+couponArrayList);
         return v;
     }
 
@@ -92,7 +129,6 @@ public class CouponFragment extends Fragment {
 
 
     }
-
 
     private void initCouponPercentage(){
         Log.d(TAG, "Preparing the recycler view");

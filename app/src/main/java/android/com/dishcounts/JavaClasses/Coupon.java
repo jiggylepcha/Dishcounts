@@ -2,25 +2,41 @@ package android.com.dishcounts.JavaClasses;
 
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 @IgnoreExtraProperties
 public class Coupon {
     private String cloudID;
     private String couponType;
-    private String discountPercentage;
+    private String couponCode;
+    private String discount_percent;
     private String discountUpto;
     private String platform;
-    private String validTill;
+    private Date validTill;
+    private String message;
 
     public Coupon(){
 
     }
 
-    public Coupon(String couponType, String discountPercentage, String discountUpto, String platform, String validTill){
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Coupon(String couponType, String couponCode, String discount_percent, String discountUpto, String platform, Date validTill, String message){
         this.couponType = couponType;
-        this.discountPercentage = discountPercentage;
+        this.couponCode = couponCode;
+        this.discount_percent = discount_percent;
         this.discountUpto = discountUpto;
-        this.platform = validTill;
+        this.validTill = validTill;
         this.platform = platform;
+        this.message=message;
     }
 
     public String getCloudID() {
@@ -39,14 +55,6 @@ public class Coupon {
         this.couponType = couponType;
     }
 
-    public String getDiscountPercentage() {
-        return discountPercentage;
-    }
-
-    public void setDiscountPercentage(String discountPercentage) {
-        this.discountPercentage = discountPercentage;
-    }
-
     public String getDiscountUpto() {
         return discountUpto;
     }
@@ -63,11 +71,38 @@ public class Coupon {
         this.platform = platform;
     }
 
-    public String getValidTill() {
+    public Date getValidTill() {
         return validTill;
     }
 
-    public void setValidTill(String validTill) {
+    public void setValidTill(Date validTill) {
         this.validTill = validTill;
+    }
+
+    public String getCouponCode() {
+        return couponCode;
+    }
+
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
+    }
+
+    public String getDiscount_percent() {
+        return discount_percent;
+    }
+
+    public void setDiscount_percent(String discount_percent) {
+        this.discount_percent = discount_percent;
+    }
+
+    public String getDate(){
+        if(validTill!=null) {
+            LocalDate localDate = this.validTill.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int year = localDate.getYear();
+            int month = localDate.getMonthValue();
+            int day = localDate.getDayOfMonth();
+            return (day + "/" + month);
+        }
+        return "NA";
     }
 }

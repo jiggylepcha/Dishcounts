@@ -39,15 +39,15 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "calling onBindViewHolder" );
-        holder.discountPercentage.setText(couponList.get(position).getDiscountPercentage());
-        holder.discountValue.setText(couponList.get(position).getDiscountUpto());
-        holder.couponLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        Log.d(TAG, "Platform: " +couponList.get(position).getPlatform());
+        Log.d(TAG, "Discount Percentage: " +couponList.get(position).getDiscount_percent());
+        Log.d(TAG, "Discount Upto: " +couponList.get(position).getDiscountUpto());
+        holder.discountPercentage.setText(couponList.get(position).getDiscount_percent()+"%");
+        if(couponList.get(position).getDiscountUpto().equals("NA"))
+            holder.discountValue.setText(couponList.get(position).getDiscountUpto());
+        else
+            holder.discountValue.setText("Rs."+couponList.get(position).getDiscountUpto());
+        holder.couponValidity.setText(couponList.get(position).getDate());
 
     }
 
