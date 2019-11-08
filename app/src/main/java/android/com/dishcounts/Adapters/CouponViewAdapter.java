@@ -50,10 +50,10 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
         else
             holder.discountValue.setText("Rs."+couponList.get(position).getDiscountUpto());
         holder.couponValidity.setText(couponList.get(position).getDate());
-        if (couponList.get(position).getPlatform().equals("ZOMATO")){
+        if (couponList.get(position).getPlatform().equalsIgnoreCase("ZOMATO")){
             holder.couponImage.setImageResource(R.drawable.zomato_logo);
         }
-        else if (couponList.get(position).getPlatform().equals("SWIGGY")){
+        else if (couponList.get(position).getPlatform().equalsIgnoreCase("SWIGGY")){
             holder.couponImage.setImageResource(R.drawable.swiggy_logo);
         }
         else{
