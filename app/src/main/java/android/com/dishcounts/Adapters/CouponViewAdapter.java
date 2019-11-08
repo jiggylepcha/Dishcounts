@@ -1,5 +1,7 @@
 package android.com.dishcounts.Adapters;
 
+import android.app.Activity;
+import android.com.dishcounts.Activities.CouponActivity;
 import android.com.dishcounts.JavaClasses.Coupon;
 import android.com.dishcounts.R;
 import android.content.Context;
@@ -38,7 +40,7 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "Platform: " +couponList.get(position).getPlatform());
         Log.d(TAG, "Discount Percentage: " +couponList.get(position).getDiscount_percent());
         Log.d(TAG, "Discount Upto: " +couponList.get(position).getDiscountUpto());
@@ -48,6 +50,29 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
         else
             holder.discountValue.setText("Rs."+couponList.get(position).getDiscountUpto());
         holder.couponValidity.setText(couponList.get(position).getDate());
+        if (couponList.get(position).getPlatform().equals("ZOMATO")){
+            holder.couponImage.setImageResource(R.drawable.zomato_logo);
+        }
+        else if (couponList.get(position).getPlatform().equals("SWIGGY")){
+            holder.couponImage.setImageResource(R.drawable.swiggy_logo);
+        }
+        else{
+            holder.couponImage.setImageResource(R.drawable.uber_eats_logo);
+        }
+
+        holder.couponLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent couponIntent = new Intent(mContext, CouponActivity.class);
+                couponIntent.putExtra("discount_percent", couponList.get(position).getDiscount_percent());
+                couponIntent.putExtra("platform", couponList.get(position).getPlatform());
+                couponIntent.putExtra("valid_till", couponList.get(position).getDate());
+                couponIntent.putExtra("coupon_code", couponList.get(position).getCouponCode());
+                couponIntent.putExtra("discount_value", couponList.get(position).getDiscountUpto());
+                couponIntent.putExtra("coupon_type", couponList.get(position).getCouponType());
+                mContext.startActivity(couponIntent);
+            }
+        });
 
     }
 
