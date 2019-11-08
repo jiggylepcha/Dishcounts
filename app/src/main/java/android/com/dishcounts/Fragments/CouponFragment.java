@@ -24,6 +24,7 @@ import android.com.dishcounts.R;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,13 +50,13 @@ public class CouponFragment extends Fragment {
     FirebaseFirestore db;
     CollectionReference couponCollection;
 
-    Button coupon;
+    TextView couponnum;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_coupon, container, false);
-
+        couponnum = v.findViewById(R.id.textView2);
         couponArrayList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
         couponCollection = db.collection("all_coupons");
@@ -121,6 +122,10 @@ public class CouponFragment extends Fragment {
                 }
             }
         });
+        if (couponArrayList.size()==1)
+            couponnum.setText(couponArrayList.size()+" coupon");
+        else
+            couponnum.setText(couponArrayList.size()+" coupons");
         return v;
     }
 
@@ -131,4 +136,27 @@ public class CouponFragment extends Fragment {
 
     }
 
+    private void initCouponPercentage(){
+        Log.d(TAG, "Preparing the recycler view");
+
+        final Query couponQuery = couponCollection
+                .orderBy("valid_till");
+        couponQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                        Coupon coupon = documentSnapshot.toObject(Coupon.class);
+                        couponArrayList.add(coupon);
+                    }
+                }
+                else {
+
+                }
+            }
+        });
+
+        Log.d(TAG, "coupon "+couponArrayList);
+
+    }
 }
