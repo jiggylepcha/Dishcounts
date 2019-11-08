@@ -1,10 +1,13 @@
 package android.com.dishcounts.Fragments;
 import android.com.dishcounts.Activities.AddManualCouponActivity;
+import android.com.dishcounts.JavaClasses.MessageExtractor;
 import android.com.dishcounts.JavaClasses.SMSObject;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.provider.Telephony;
 import android.util.Log;
@@ -14,6 +17,13 @@ import android.view.ViewGroup;
 import android.com.dishcounts.R;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,11 +74,11 @@ public class AddNewFragment extends Fragment {
 
     }
 
-    private List<SMSObject> getSMS() {
+    private List<Map<String, Object>> getSMS() {
         List<String> lstSms = new ArrayList<String>();
         ContentResolver cr = getActivity().getApplicationContext().getContentResolver();
         SMSObject sms_object;
-        List<SMSObject> list_messages = new ArrayList<SMSObject>();
+        List<Map<String, Object>> list_messages = new ArrayList<Map<String, Object>>();
 
         Cursor c = cr.query(Telephony.Sms.Inbox.CONTENT_URI, // Official CONTENT_URI from docs
                 new String[] { Telephony.Sms.Inbox.BODY }, // Select body text
@@ -81,15 +91,25 @@ public class AddNewFragment extends Fragment {
         if (c.moveToFirst()) {
             for (int i = 0; i < totalSMS; i++) {
                 lstSms.add(c.getString(0));
-                sms_object = new SMSObject();
+                String text = "";
                 try{
-                    sms_object.setMsg_body(c.getString(c.getColumnIndexOrThrow("body")));
+                    text = c.getString(c.getColumnIndexOrThrow("body"));
                 }
                 catch (Exception e){};
+                if (text.compareTo("") != 0){
+                    try {
+                        Map<String, Object> couponData = MessageExtractor.couponExtractor(text);
+                        if (couponData != null){
+                            list_messages.add(couponData);
+                        }
+                    } catch (ParseException e) {
 
+                    }
+
+                }
                 
 
-                list_messages.add(sms_object);
+//                list_messages.add(sms_object);
                 c.moveToNext();
             }
         } else {
@@ -105,31 +125,31 @@ public class AddNewFragment extends Fragment {
 
         loadingText.setText("Loading Messages...");
 
-        Log.d("PAY", "CAME IN");
+        List<Map<String, Object>> sms = getSMS();
 
-        List<SMSObject> sms = getSMS();
-        for (SMSObject single_sms : sms){
-            Map<String, Object> smsData = new HashMap<>();
-            smsData.put("sender", single_sms.getAddress());
-            smsData.put("text", single_sms.getMsg_body());
-            smsData.put("timestamp", single_sms.getTime_string());
-//            FirebaseFirestore db = FirebaseFirestore.getInstance();
-//            db.collection("/sms_messages")
-//                    .add(smsData)
-//                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                        @Override
-//                        public void onSuccess(DocumentReference documentReference) {
-//                            Log.d("SMDFIREBASE", "DocumentSnapshot added with ID: " + documentReference.getId());
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Log.w("SMDFIREBASE", "Error adding document", e);
-//                        }
-//                    });
+        final String lastSMSText = (String) sms.get(sms.size() -1).get("message");
+
+        for (final Map<String, Object> single_sms : sms){
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("/all_coupons")
+                    .add(single_sms)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d("FIREBASECOUPON", "DocumentSnapshot added with ID: " + documentReference.getId());
+                            String temp = (String) single_sms.get("message");
+                            if (temp.compareTo(lastSMSText) == 0){
+                                loadingText.setText("");
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("SMDFIREBASE", "Error adding document", e);
+                        }
+                    });
         }
 
-        loadingText.setText("");
     }
 }
