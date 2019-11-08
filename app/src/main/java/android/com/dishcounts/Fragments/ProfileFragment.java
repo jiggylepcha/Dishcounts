@@ -11,6 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.com.dishcounts.R;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class ProfileFragment extends Fragment {
@@ -18,7 +22,17 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View v =  inflater.inflate(R.layout.fragment_profile, container, false);
+        TextView user_email = v.findViewById(R.id.textView12);
+        TextView user_name = v.findViewById(R.id.textView11);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        String name = user.getDisplayName();
+        String email = user.getEmail();
+
+        user_email.setText(email);
+        user_name.setText(name);
+        return v;
     }
 
     @Override

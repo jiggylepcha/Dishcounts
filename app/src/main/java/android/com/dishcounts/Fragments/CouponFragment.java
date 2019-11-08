@@ -131,27 +131,4 @@ public class CouponFragment extends Fragment {
 
     }
 
-    private void initCouponPercentage(){
-        Log.d(TAG, "Preparing the recycler view");
-
-        final Query couponQuery = couponCollection
-                .orderBy("valid_till");
-        couponQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
-                        Coupon coupon = documentSnapshot.toObject(Coupon.class);
-                        couponArrayList.add(coupon);
-                    }
-                }
-                else {
-
-                }
-            }
-        });
-
-        Log.d(TAG, "coupon "+couponArrayList);
-
-    }
 }

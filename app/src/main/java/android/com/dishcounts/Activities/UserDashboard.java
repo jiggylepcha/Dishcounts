@@ -17,10 +17,12 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class UserDashboard extends AppCompatActivity {
 
     private ActionBar toolbar;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,9 @@ public class UserDashboard extends AppCompatActivity {
                 Toast.makeText(this, "Post Added Succesfully!", Toast.LENGTH_SHORT).show();
             }
         }
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         toolbar = getSupportActionBar();
         toolbar.hide();

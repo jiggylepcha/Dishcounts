@@ -3,6 +3,7 @@ package android.com.dishcounts.JavaClasses;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 
