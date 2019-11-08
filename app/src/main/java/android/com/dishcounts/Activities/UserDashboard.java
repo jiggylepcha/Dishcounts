@@ -13,20 +13,43 @@ import android.com.dishcounts.Fragments.ProfileFragment;
 import android.os.Bundle;
 import android.com.dishcounts.R;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class UserDashboard extends AppCompatActivity {
 
     private ActionBar toolbar;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        Bundle extras = getIntent().getExtras();
+        Boolean showToast;
+
+        if (extras != null){
+            showToast =  extras.getBoolean("showToast");
+            if (showToast){
+                Toast.makeText(this, "Coupon Added Succesfully!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, "Post Added Succesfully!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         toolbar = getSupportActionBar();
         toolbar.hide();
         toolbar.setTitle("Coupon");
+
+
         BottomNavigationView bottomNav = findViewById(R.id.navigation);
         bottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CouponFragment()).commit();

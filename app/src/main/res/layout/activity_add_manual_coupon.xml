@@ -8,7 +8,7 @@
     tools:context=".Activities.AddManualCouponActivity">
 
     <Button
-        android:id="@+id/button33"
+        android:id="@+id/submitManualCoupon"
         android:layout_width="365dp"
         android:layout_height="73dp"
         android:layout_marginBottom="24dp"
@@ -16,6 +16,7 @@
         android:paddingLeft="18sp"
         android:paddingRight="18sp"
         android:shadowColor="#00FFFFFF"
+        android:onClick="submitManualCoupon"
         android:text="Submit"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
@@ -25,62 +26,65 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/textView31"
+        android:id="@+id/otherDetails"
         android:layout_width="362dp"
         android:layout_height="64dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rec"
         android:maxLines="1"
         android:paddingLeft="10pt"
-        android:text="Other Details"
+        android:hint="Other Details"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        app:layout_constraintTop_toBottomOf="@+id/validity" />
 
     <EditText
-        android:id="@+id/textView30"
+        android:id="@+id/validity"
         android:layout_width="362dp"
         android:layout_height="64dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rec"
         android:maxLines="1"
         android:paddingLeft="10pt"
-        android:text="Validity*"
+        android:hint="Validity*"
+        android:clickable="true"
+        android:focusable="false"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+        app:layout_constraintTop_toBottomOf="@+id/limit" />
 
     <EditText
-        android:id="@+id/textView29"
+        android:id="@+id/limit"
         android:layout_width="362dp"
         android:layout_height="64dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rec"
         android:maxLines="1"
         android:paddingLeft="10pt"
-        android:text="Limit*"
+        android:hint="Limit*"
+        android:inputType="number"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+        app:layout_constraintTop_toBottomOf="@+id/discount" />
 
     <EditText
-        android:id="@+id/textView26"
+        android:id="@+id/couponType"
         android:layout_width="362dp"
         android:layout_height="64dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/rec"
         android:maxLines="1"
         android:paddingLeft="10pt"
-        android:text="Coupon Type*"
+        android:hint="Coupon Type*"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,36 +93,37 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView16" />
 
     <EditText
-        android:id="@+id/textView27"
+        android:id="@+id/platform"
         android:layout_width="362dp"
         android:layout_height="64dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rec"
         android:maxLines="1"
         android:paddingLeft="10pt"
-        android:text="Platform*"
+        android:hint="Platform*"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+        app:layout_constraintTop_toBottomOf="@+id/couponType" />
 
     <EditText
-        android:id="@+id/textView28"
+        android:id="@+id/discount"
         android:layout_width="362dp"
         android:layout_height="64dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rec"
         android:maxLines="1"
         android:paddingLeft="10pt"
-        android:text="Discount*"
+        android:hint="Discount*"
+        android:inputType="number"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintTop_toBottomOf="@+id/platform" />
 
     <ImageView
         android:id="@+id/imageView16"
