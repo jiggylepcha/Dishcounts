@@ -102,33 +102,18 @@ public class AddManualCouponActivity extends AppCompatActivity {
             showErrorMessage("Enter Platform (Zomato, Swiggy, UberEats )");
             return;
         }
-        Integer discountNum = 0;
-        try {
-            discountNum = Integer.parseInt(discount.getText().toString());
-        }
-        catch (Exception e){
-            showErrorMessage("Enter Discount Percentage");
-            return;
-        }
-        Integer limitNum = 0;
-        try{
-            limitNum = Integer.parseInt(limit.getText().toString());
-        }
-        catch (Exception e){
-
-        }
+        String discountStr = discount.getText().toString();
+        String limitStr = limit.getText().toString();
 
         String otherDetailsStr = otherDetails.getText().toString();
 
         Map<String, Object> coupon = new HashMap<>();
         coupon.put("coupon_type", couponTypeStr);
         coupon.put("platform", platformStr);
-        coupon.put("discount_percent", discountNum);
-        coupon.put("discount_upto", limitNum);
+        coupon.put("discount_percent", discountStr);
+        coupon.put("discount_upto", limitStr);
         coupon.put("other_details", otherDetailsStr);
         coupon.put("valid_till", myCalendar.getTime());
-
-        Log.d("SMDFIREBASE", "CAME IN");
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("/all_coupons")
@@ -136,7 +121,7 @@ public class AddManualCouponActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Log.d("SMDFIREBASE", "DocumentSnapshot added with ID: " + documentReference.getId());
+                            Log.d("FIREBASECOUPON", "DocumentSnapshot added with ID: " + documentReference.getId());
                             Intent intent = new Intent(getBaseContext(), UserDashboard.class);
                             intent.putExtra("showToast", true);
                             startActivity(intent);
