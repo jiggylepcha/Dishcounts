@@ -1,5 +1,8 @@
 package android.com.dishcounts.JavaClasses;
 
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class Coupon {
     private String cloudID;
     private String couponType;
@@ -7,6 +10,18 @@ public class Coupon {
     private String discountUpto;
     private String platform;
     private String validTill;
+
+    public Coupon(){
+
+    }
+
+    public Coupon(String couponType, String discountPercentage, String discountUpto, String platform, String validTill){
+        this.couponType = couponType;
+        this.discountPercentage = discountPercentage;
+        this.discountUpto = discountUpto;
+        this.platform = validTill;
+        this.platform = platform;
+    }
 
     public String getCloudID() {
         return cloudID;

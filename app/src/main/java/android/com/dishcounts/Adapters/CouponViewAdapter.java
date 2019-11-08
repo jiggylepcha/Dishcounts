@@ -1,5 +1,6 @@
 package android.com.dishcounts.Adapters;
 
+import android.com.dishcounts.JavaClasses.Coupon;
 import android.com.dishcounts.R;
 import android.content.Context;
 import android.content.Intent;
@@ -20,15 +21,11 @@ import java.util.ArrayList;
 public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.ViewHolder> {
     private static final String TAG = "CouponViewAdapter";
 
-    private ArrayList<String> percentage = new ArrayList<>();
-    private ArrayList<String> date = new ArrayList<>();
-    private ArrayList<String> discountValue = new ArrayList<>();
+    private ArrayList<Coupon> couponList;
     private Context mContext;
 
-    public CouponViewAdapter(ArrayList<String> percentage, ArrayList<String> date, ArrayList<String> discountValue, Context mContext){
-        this.percentage = percentage;
-        this.date = date;
-        this.discountValue = discountValue;
+    public CouponViewAdapter(ArrayList<Coupon> coupons, Context mContext){
+        this.couponList = coupons;
         this.mContext = mContext;
     }
 
@@ -42,9 +39,9 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "calling onBindViewHolder");
-        holder.discountPercentage.setText(percentage.get(position));
-        holder.couponValidity.setText(date.get(position));
+        Log.d(TAG, "calling onBindViewHolder" );
+        holder.discountPercentage.setText(couponList.get(position).getDiscountPercentage());
+        holder.discountValue.setText(couponList.get(position).getDiscountUpto());
         holder.couponLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +53,7 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return percentage.size();
+        return couponList.size();
     }
 
     public class ViewHolder  extends RecyclerView.ViewHolder{

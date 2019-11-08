@@ -2,15 +2,18 @@ package android.com.dishcounts.Fragments;
 
 import android.com.dishcounts.Activities.CouponActivity;
 import android.com.dishcounts.Adapters.CouponViewAdapter;
+import android.com.dishcounts.JavaClasses.Coupon;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,36 +21,70 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.com.dishcounts.R;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.SearchView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class CouponFragment extends Fragment {
     private static final String TAG = "CouponFragment";
 
-    private ArrayList<String> percentage = new ArrayList<>();
-    private ArrayList<String> validity = new ArrayList<>();
-    private ArrayList<String> value = new ArrayList<>();
+    private ArrayList<Coupon> couponArrayList;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    CouponViewAdapter adapter;
+
+    FirebaseFirestore db;
+    CollectionReference couponCollection;
+
     Button coupon;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_coupon, container, false);
-        initCouponPercentage();
-        initRecyclerView(v);
 
+        couponArrayList = new ArrayList<>();
+        db = FirebaseFirestore.getInstance();
+        couponCollection = db.collection("all_coupons");
+
+        RecyclerView couponList = v.findViewById(R.id.coupon_recycler_view);
+        couponList.setHasFixedSize(true);
+        couponList.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new CouponViewAdapter(couponArrayList, getContext());
+        couponList.setAdapter(adapter);
+
+//        initCouponPercentage();
+
+        final Query couponQuery = couponCollection
+                .orderBy("valid_till");
+        couponQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                        Coupon coupon = documentSnapshot.toObject(Coupon.class);
+                        couponArrayList.add(coupon);
+                    }
+                }
+                else {
+
+                }
+            }
+        });
+
+        Log.d(TAG, "coupon "+couponArrayList);
         return v;
     }
-
-    private void initRecyclerView(View v) {
-        RecyclerView couponList = v.findViewById(R.id.coupon_recycler_view);
-        CouponViewAdapter adapter = new CouponViewAdapter(percentage, validity, value, getContext());
-        couponList.setLayoutManager(new LinearLayoutManager(getContext()));
-        couponList.setAdapter(adapter);
-    }
-
-
 
 
     @Override
@@ -56,25 +93,28 @@ public class CouponFragment extends Fragment {
 
     }
 
+
     private void initCouponPercentage(){
         Log.d(TAG, "Preparing the recycler view");
-        percentage.add("100%");
-        validity.add("12/9");
 
-        percentage.add("20");
-        validity.add("12/12");
+        final Query couponQuery = couponCollection
+                .orderBy("valid_till");
+        couponQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                        Coupon coupon = documentSnapshot.toObject(Coupon.class);
+                        couponArrayList.add(coupon);
+                    }
+                }
+                else {
 
-        percentage.add("40");
-        validity.add("4/8");
+                }
+            }
+        });
 
-        percentage.add("35");
-        validity.add("6/7");
-
-        percentage.add("50");
-        validity.add("9/11");
-
-        percentage.add("10");
-        validity.add("1/11");
+        Log.d(TAG, "coupon "+couponArrayList);
 
     }
 }
