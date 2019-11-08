@@ -1,23 +1,19 @@
 package android.com.dishcounts.Fragments;
-
 import android.com.dishcounts.Activities.AddManualCouponActivity;
 import android.com.dishcounts.JavaClasses.SMSObject;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.provider.Telephony;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.com.dishcounts.R;
 import android.widget.Button;
-
+import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +24,8 @@ public class AddNewFragment extends Fragment {
     Button add;
     Button fetchInbox;
 
+
+    TextView loadingText;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,6 +38,9 @@ public class AddNewFragment extends Fragment {
                 openAdd();
             }
         });
+
+
+        loadingText = v.findViewById(R.id.loadingText);
 
 
         fetchInbox = v.findViewById(R.id.button30);
@@ -82,21 +83,12 @@ public class AddNewFragment extends Fragment {
                 lstSms.add(c.getString(0));
                 sms_object = new SMSObject();
                 try{
-                    sms_object.setId(c.getString(c.getColumnIndexOrThrow("_id")));
-                }
-                catch (Exception e) { };
-                try{
-                    sms_object.setAddress(c.getString(c.getColumnIndexOrThrow("address")));
-                }
-                catch (Exception e){};
-                try{
                     sms_object.setMsg_body(c.getString(c.getColumnIndexOrThrow("body")));
                 }
                 catch (Exception e){};
-                try{
-                    sms_object.setTime_string(c.getString(c.getColumnIndexOrThrow("date")));
-                }
-                catch (Exception e){};
+
+                
+
                 list_messages.add(sms_object);
                 c.moveToNext();
             }
@@ -110,15 +102,17 @@ public class AddNewFragment extends Fragment {
 
 
     public void getMessagesFromInbox(){
+
+        loadingText.setText("Loading Messages...");
+
+        Log.d("PAY", "CAME IN");
+
         List<SMSObject> sms = getSMS();
         for (SMSObject single_sms : sms){
             Map<String, Object> smsData = new HashMap<>();
             smsData.put("sender", single_sms.getAddress());
             smsData.put("text", single_sms.getMsg_body());
             smsData.put("timestamp", single_sms.getTime_string());
-
-            Log.d("SMDFIREBASE", single_sms.getMsg_body());
-
 //            FirebaseFirestore db = FirebaseFirestore.getInstance();
 //            db.collection("/sms_messages")
 //                    .add(smsData)
@@ -136,5 +130,6 @@ public class AddNewFragment extends Fragment {
 //                    });
         }
 
+        loadingText.setText("");
     }
 }
