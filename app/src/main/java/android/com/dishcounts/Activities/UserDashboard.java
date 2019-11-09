@@ -10,14 +10,26 @@ import android.com.dishcounts.Fragments.AddNewFragment;
 import android.com.dishcounts.Fragments.CouponFragment;
 import android.com.dishcounts.Fragments.FriendsFragment;
 import android.com.dishcounts.Fragments.ProfileFragment;
+import android.com.dishcounts.JavaClasses.Logs;
+import android.content.Intent;
 import android.os.Bundle;
 import android.com.dishcounts.R;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserDashboard extends AppCompatActivity {
 
@@ -62,21 +74,34 @@ public class UserDashboard extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.coupons:
+
+                    String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                    Logs.recordLog(email,"Coupon Tab");
+
                     toolbar.setTitle("Coupon");
                     fragment = new CouponFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.add_new:
+                    email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                    Logs.recordLog(email,"Add New Tab");
+
                     toolbar.setTitle("Add New");
                     fragment = new AddNewFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.friends:
+                    email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                    Logs.recordLog(email,"Friends Tab");
+
                     toolbar.setTitle("Friends");
                     fragment = new FriendsFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.profile:
+                    email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                    Logs.recordLog(email,"Profile Tab");
+
                     toolbar.setTitle("Profile");
                     fragment = new ProfileFragment();
                     loadFragment(fragment);

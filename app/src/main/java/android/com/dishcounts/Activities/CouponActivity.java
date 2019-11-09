@@ -25,6 +25,19 @@ public class CouponActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         code = findViewById(R.id.textView16);
         copy = findViewById(R.id.copy);
+
+        Bundle extras = getIntent().getExtras();
+        TextView discountPercent = findViewById(R.id.textView21);
+        discountPercent.setText(extras.getString("discount_percent") + "%");
+
+        TextView discountValue = findViewById(R.id.textView22);
+        discountValue.setText(extras.getString("discount_value"));
+
+        TextView couponValidity = findViewById(R.id.textView24);
+        couponValidity.setText(extras.getString("valid_till"));
+
+        code.setText(extras.getString("coupon_code"));
+
         copy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
