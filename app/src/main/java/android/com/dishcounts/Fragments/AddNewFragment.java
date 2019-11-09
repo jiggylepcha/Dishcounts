@@ -1,5 +1,6 @@
 package android.com.dishcounts.Fragments;
 import android.com.dishcounts.Activities.AddManualCouponActivity;
+import android.com.dishcounts.JavaClasses.Logs;
 import android.com.dishcounts.JavaClasses.MessageExtractor;
 import android.com.dishcounts.JavaClasses.SMSObject;
 import android.content.ContentResolver;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -122,6 +124,9 @@ public class AddNewFragment extends Fragment {
 
 
     public void getMessagesFromInbox(){
+
+        String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        Logs.recordLog(email,"Added Messages from Inbox");
 
         loadingText.setText("Loading Messages...");
 

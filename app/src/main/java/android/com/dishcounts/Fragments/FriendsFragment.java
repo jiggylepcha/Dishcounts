@@ -3,6 +3,7 @@ package android.com.dishcounts.Fragments;
 import android.com.dishcounts.Activities.FindFriendActivity;
 import android.com.dishcounts.Activities.PostActivity;
 import android.com.dishcounts.Adapters.OrderViewAdapter;
+import android.com.dishcounts.JavaClasses.Logs;
 import android.com.dishcounts.JavaClasses.Order;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -86,6 +88,9 @@ public class FriendsFragment extends Fragment {
 
 
     public void openPost(){
+        String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        Logs.recordLog(email,"Clicked Looking for someone to Order it");
+
         Intent intent = new Intent(this.getContext(), PostActivity.class);
         startActivity(intent);
     }

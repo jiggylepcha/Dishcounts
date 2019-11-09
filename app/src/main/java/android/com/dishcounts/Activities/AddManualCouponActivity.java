@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.com.dishcounts.JavaClasses.Logs;
 import android.com.dishcounts.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
@@ -92,6 +94,10 @@ public class AddManualCouponActivity extends AppCompatActivity {
     }
 
     public void submitManualCoupon(View v){
+
+        String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        Logs.recordLog(email,"Added Coupon Manually");
+
         String couponTypeStr = couponType.getText().toString();
         if (couponTypeStr.compareTo("") == 0){
             showErrorMessage("Enter Coupon Type (BOGO or STRAIGHT DISCOUNT)");

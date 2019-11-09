@@ -7,7 +7,7 @@
     tools:context=".Activities.CouponActivity">
 
     <Button
-        android:id="@+id/button23"
+        android:id="@+id/copy"
         android:layout_width="346dp"
         android:layout_height="122dp"
         android:layout_marginBottom="24dp"
@@ -27,37 +27,22 @@
         android:id="@+id/textView24"
         android:layout_width="103dp"
         android:layout_height="55dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="4dp"
         android:text="31/9"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="36sp"
-        app:layout_constraintStart_toEndOf="@+id/textView23"
+        app:layout_constraintStart_toEndOf="@+id/textView22"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
+        android:layout_marginStart="73dp"
         android:layout_marginTop="16dp"
         android:text="valid till"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="16dp"
-        android:text="min. order"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView18"
@@ -67,8 +52,7 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
+        android:layout_marginStart="41dp"
         android:layout_marginTop="16dp"
         android:text="discount"
         android:textColor="@color/colorPrimaryDark"
@@ -107,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        android:src="@drawable/background_image" />
 
     <TextView
         android:id="@+id/textView13"
@@ -179,8 +163,7 @@
         android:id="@+id/textView21"
         android:layout_width="70dp"
         android:layout_height="56dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="4dp"
         android:text="50%"
         android:textAlignment="center"
@@ -193,8 +176,7 @@
         android:id="@+id/textView22"
         android:layout_width="70dp"
         android:layout_height="56dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="53dp"
         android:layout_marginTop="4dp"
         android:text="100"
         android:textAlignment="center"
@@ -207,28 +189,13 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
+        android:layout_marginStart="73dp"
         android:layout_marginTop="16dp"
         android:text="upto"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="70dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="4dp"
-        android:text="75"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="36sp"
-        app:layout_constraintStart_toEndOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <TextView
         android:id="@+id/textView16"

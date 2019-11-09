@@ -3,9 +3,11 @@ package android.com.dishcounts.Adapters;
 import android.app.Activity;
 import android.com.dishcounts.Activities.CouponActivity;
 import android.com.dishcounts.JavaClasses.Coupon;
+import android.com.dishcounts.JavaClasses.Logs;
 import android.com.dishcounts.R;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -45,16 +49,23 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
         Log.d(TAG, "Discount Percentage: " +couponList.get(position).getDiscount_percent());
         Log.d(TAG, "Discount Upto: " +couponList.get(position).getDiscountUpto());
         holder.discountPercentage.setText(couponList.get(position).getDiscount_percent()+"%");
-        if(couponList.get(position).getDiscountUpto().equals("NA"))
-            holder.discountValue.setText(couponList.get(position).getDiscountUpto());
-        else
-            holder.discountValue.setText("Rs."+couponList.get(position).getDiscountUpto());
+        holder.discountValue.setText(couponList.get(position).getDiscountUpto());
         holder.couponValidity.setText(couponList.get(position).getDate());
         if (couponList.get(position).getPlatform().equalsIgnoreCase("ZOMATO")){
             holder.couponImage.setImageResource(R.drawable.zomato_logo);
+            holder.uptil.setTextColor(Color.parseColor("#e23744"));
+            holder.validtill.setTextColor(Color.parseColor("#e23744"));
+            holder.discountValue.setTextColor(Color.parseColor("#e23744"));
+            holder.discountPercentage.setTextColor(Color.parseColor("#e23744"));
+            holder.couponValidity.setTextColor(Color.parseColor("#e23744"));
         }
         else if (couponList.get(position).getPlatform().equalsIgnoreCase("SWIGGY")){
             holder.couponImage.setImageResource(R.drawable.swiggy_logo);
+            holder.uptil.setTextColor(Color.parseColor("#f6881f"));
+            holder.validtill.setTextColor(Color.parseColor("#f6881f"));
+            holder.discountValue.setTextColor(Color.parseColor("#f6881f"));
+            holder.discountPercentage.setTextColor(Color.parseColor("#f6881f"));
+            holder.couponValidity.setTextColor(Color.parseColor("#f6881f"));
         }
         else{
             holder.couponImage.setImageResource(R.drawable.uber_eats_logo);
@@ -63,6 +74,10 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
         holder.couponLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                Logs.recordLog(email,"Clicked Coupon");
+
                 Intent couponIntent = new Intent(mContext, CouponActivity.class);
                 couponIntent.putExtra("discount_percent", couponList.get(position).getDiscount_percent());
                 couponIntent.putExtra("platform", couponList.get(position).getPlatform());
@@ -83,7 +98,7 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
 
     public class ViewHolder  extends RecyclerView.ViewHolder{
         ImageView couponImage;
-        TextView discountPercentage, couponValidity, discountValue;
+        TextView discountPercentage, couponValidity, discountValue, uptil, validtill;
         CardView couponLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -93,6 +108,8 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
             discountValue = itemView.findViewById(R.id.coupon_value);
             couponValidity = itemView.findViewById(R.id.valid_value);
             couponLayout = itemView.findViewById(R.id.coupon_card);
+            uptil = itemView.findViewById(R.id.upto);
+            validtill = itemView.findViewById(R.id.valid_till);
         }
     }
 }
