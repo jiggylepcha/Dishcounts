@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorAccent"
     android:layout_height="match_parent"
-    tools:context=".Activities.FindFriendActivity">
+    tools:context="dhcs.com.dishcounts.Activities.FindFriendActivity">
 
     <Button
         android:id="@+id/button24"

@@ -12,14 +12,14 @@
         android:roundIcon="@drawable/dishcount_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.PostActivity"></activity>
-        <activity android:name=".Activities.FindFriendActivity" />
-        <activity android:name=".Activities.AddManualCouponActivity" />
-        <activity android:name=".Activities.CouponActivity" />
-        <activity android:name=".Activities.OnboardingActivity" />
-        <activity android:name=".Activities.UserDashboard"></activity>
-        <activity android:name=".Activities.SMSFetchActivity" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name="dhcs.com.dishcounts.Activities.PostActivity"></activity>
+        <activity android:name="dhcs.com.dishcounts.Activities.FindFriendActivity" />
+        <activity android:name="dhcs.com.dishcounts.Activities.AddManualCouponActivity" />
+        <activity android:name="dhcs.com.dishcounts.Activities.CouponActivity" />
+        <activity android:name="dhcs.com.dishcounts.Activities.OnboardingActivity" />
+        <activity android:name="dhcs.com.dishcounts.Activities.UserDashboard"></activity>
+        <activity android:name="dhcs.com.dishcounts.Activities.SMSFetchActivity" />
+        <activity android:name="dhcs.com.dishcounts.Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
