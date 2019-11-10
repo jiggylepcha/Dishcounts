@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/dineInBackground"
     android:orientation="vertical"
-    tools:context=".Fragments.Onboarding1">
+    tools:context="dhcs.com.dishcounts.Fragments.Onboarding1">
 
     <ImageView
         android:id="@+id/imageView"
