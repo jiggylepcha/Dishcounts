@@ -67,6 +67,11 @@ public class CouponViewAdapter extends RecyclerView.Adapter<CouponViewAdapter.Vi
         }
         else{
             holder.couponImage.setImageResource(R.drawable.uber_eats_logo);
+            holder.uptil.setTextColor(Color.parseColor("#000000"));
+            holder.validtill.setTextColor(Color.parseColor("#000000"));
+            holder.discountValue.setTextColor(Color.parseColor("#000000"));
+            holder.discountPercentage.setTextColor(Color.parseColor("#000000"));
+            holder.couponValidity.setTextColor(Color.parseColor("#000000"));
         }
 
         holder.couponLayout.setOnClickListener(new View.OnClickListener() {
