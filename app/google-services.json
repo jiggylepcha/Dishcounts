@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:836443333091:android:770c05acf3cc684614c0d6",
         "android_client_info": {
-          "package_name": "android.com.dishcounts"
+          "package_name": "dhcs.com.dishcounts"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "836443333091-1pmqbvgigjc09se27o1mlumcfdupm0g4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "android.com.dishcounts",
+            "package_name": "dhcs.com.dishcounts",
             "certificate_hash": "61a0b277ad54e45d14438b1ddadb7ad7ab901f57"
           }
         },
