@@ -67,7 +67,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new TimePickerDialog(PostActivity.this, time, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE), false).show();
+                new TimePickerDialog(PostActivity.this,R.style.DateTheme, time, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE), false).show();
             }
         });
     }

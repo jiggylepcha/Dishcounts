@@ -72,7 +72,7 @@ public class AddManualCouponActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(AddManualCouponActivity.this, date, myCalendar
+                new DatePickerDialog(AddManualCouponActivity.this,R.style.DateTheme, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
